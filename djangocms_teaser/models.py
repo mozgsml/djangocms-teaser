@@ -47,7 +47,10 @@ class Tiser(CMSPlugin):
     )
 
     def get_title(self):
-        return self.header
+        if (self.header is None):
+            return Truncator(strip_tags(self.text).replace('&shy;', '')).words(3, truncate="...")
+        else:
+            return self.header;
 
     def __str__(self):
         return self.get_title()
