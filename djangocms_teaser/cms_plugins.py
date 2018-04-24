@@ -9,10 +9,26 @@ class TiserPlugin(CMSPluginBase):
     model = Tiser
 
     def get_render_template(self, context, instance, placeholder):
-        return 'djangocms_teaser/{}.html'.format(instance.template)    
+        return 'djangocms_teaser/{}.html'.format(instance.template)
 
     def render(self, context, instance, placeholder):
         context.update({'instance': instance})
         return context
+
+    fieldsets = [
+        (None, {
+            'fields': (
+                'image',
+                'header',
+                'text',
+            )
+        }),
+        (_('Advanced settings'), {
+            'classes': ('collapse',),
+            'fields': (
+                'template',
+            )
+        }),
+    ]
 
 plugin_pool.register_plugin(TiserPlugin)

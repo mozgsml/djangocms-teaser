@@ -42,7 +42,7 @@ class Tiser(CMSPlugin):
     template = models.CharField(
         verbose_name=_('Template'),
         choices=get_templates(),
-        default=get_default_template,
+        default=get_default_template(),
         max_length=255,
     )
 
