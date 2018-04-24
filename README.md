@@ -1,2 +1,2 @@
-# djangocms-bootstrap-teaser
-Simple teaser plugin with image for Django-CMS
+# djangocms-teaser
+Simple teaser(image + header + text) plugin for Django-CMS

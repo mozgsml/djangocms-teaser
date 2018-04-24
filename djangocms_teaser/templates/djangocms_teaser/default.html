@@ -1,0 +1,16 @@
+{% load thumbnail %}
+
+{% thumbnail instance.image 70x70 crop=smart upscale=true as thumbnail %}
+<div class="col-md-12 col-lg-6 col-xl-6 tiser">
+  <div class="tiser-row">
+    <div class="tiser-logo">
+      <img src="{{ thumbnail.url }}" alt="">
+    </div>
+    <div class="tiser-about">
+      {% if instance.title %}
+        <h3>{{ instance.title }}</h3>
+      {% endif %}
+      {{ instance.about }}
+    </div>
+  </div>
+</div>
