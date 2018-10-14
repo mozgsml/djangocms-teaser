@@ -1,7 +1,8 @@
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
-from django.utils.translation import ugettext, ugettext_lazy as _
-from .models import *
+from django.utils.translation import ugettext_lazy as _
+from .models import Tiser
+
 
 class TiserPlugin(CMSPluginBase):
     name = _("Teaser")
@@ -12,6 +13,7 @@ class TiserPlugin(CMSPluginBase):
         return 'djangocms_teaser/{}.html'.format(instance.template)
 
     def render(self, context, instance, placeholder):
+        context['picture_link'] = instance.get_link()
         context.update({'instance': instance})
         return context
 
@@ -23,6 +25,14 @@ class TiserPlugin(CMSPluginBase):
                 'text',
             )
         }),
+        (_('Link settings'), {
+            'classes': ('collapse',),
+            'fields': (
+                ('link_url', 'link_page'),
+                'link_target',
+                'link_attributes',
+            )
+        }),
         (_('Advanced settings'), {
             'classes': ('collapse',),
             'fields': (
@@ -30,5 +40,6 @@ class TiserPlugin(CMSPluginBase):
             )
         }),
     ]
+
 
 plugin_pool.register_plugin(TiserPlugin)

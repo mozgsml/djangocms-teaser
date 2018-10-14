@@ -2,11 +2,29 @@
 
 {% thumbnail instance.image 32x32 crop=smart upscale=true as thumbnail %}
 
-<div class="icon-tiser">
-  <div class="icon" style="background-image:url('{{ thumbnail.url }}');"></div>
-  <hr>
-  {% if instance.header %}
-    <h3>{{ instance.header }}</h3>
-  {% endif %}
-  {{ instance.text }}
-</div>
+{% if picture_link %}
+  <a class="icon-tiser" href="{{ picture_link }}"
+  {% if instance.link_target %} target="{{ instance.link_target }}"{% endif %}
+  {{ instance.link_attributes_str }}>
+{% else %}
+  <div class="icon-tiser">
+{% endif %}
+
+  <div class="icon" style="background-image:url('{{ thumbnail.url }}');">
+    <div class="icon-tiser__subtitle">
+      {% if instance.header %}
+        <h3>{{ instance.header }}</h3>
+      {% endif %}
+      {% if instance.text %}
+        <div class="tiser-text">
+          {{ instance.text }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+{% if picture_link %}
+  </a>
+{% else %}
+  </div>
+{% endif %}
